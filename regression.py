@@ -1,3 +1,10 @@
+"""
+Usage: 
+run the file by using python regression.py
+It is possibile to change the prediction by changing the variable simulation_list=RUNX or make your own list with the same format of the others
+NOTE: the execution will override model.sav every time
+"""
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -6,8 +13,7 @@ import matplotlib.pyplot as plt
 
 
 def extract_dataset(dataset, list_key):
-	keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:","Glucose concentration in Feed stream:"]#, "Glucose concentration in BR:", "Glutamine concentration in BR:", "Ammonium concentration in BR:"]
-	#keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:", "Feeding Rate:", "Perfusion Rate:", "Bleed Rate:", "Glucose concentration in Feed stream:", "Glucose concentration in Feed stream:"]
+	keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:","Glucose concentration in Feed stream:"]
 	dataset_to_return=[]
 	for elem in list_key:
 		tmp = []
@@ -45,7 +51,16 @@ reg.intercept_
 filename="model.sav"
 pickle.dump(reg, open(filename, 'wb'))
 print(reg.score(train_dataset,y))
-simulation_list=[[36.5, 7.25, 240, 10], [36.5, 7, 210, 10], [36.5, 7, 240, 10], [37, 7, 240, 10]]
+RUN3=[[36, 6.75, 210, 10], [37, 7.25, 270, 5], [36, 7, 240, 5], [36, 7.25, 210, 10]]
+RUN4=[[37, 6.75, 270, 10], [36, 7, 270, 5], [37, 7.25, 210, 17.5], [36, 7.25, 210, 10]]
+RUN5=[[37, 7.25, 240, 17.5], [36, 6.75, 240, 10], [36.5, 6.75, 270, 17.5], [37, 6.75, 210, 5]]
+RUN6=[[36, 6.75, 240, 5], [37, 7.25, 270, 10], [37, 7.25, 270, 10], [36, 6.75, 240, 5]]
+RUN7=[[37, 7, 210, 17.5], [36, 7.25, 240, 17.5], [36, 7, 270, 10], [36.5, 7.25, 270, 17.5]]
+RUN8=[[36.5, 6.75, 210, 17.5], [36.5, 7, 240, 17.5], [37, 6.75, 210, 10], [37, 6.75, 240, 17.5]]
+RUN9=[[36.5, 7.25, 210, 5], [36.5, 6.75, 270, 10], [36.5, 7.25, 210, 5], [36.5, 7, 270, 5]]
+RUN10=[[36.5, 7.25, 240, 10], [36.5, 7, 210, 10], [36.5, 7, 210, 10], [37, 7, 240, 10]]
+
+simulation_list=RUN7
 simulation=[]
 for i in range(0, 1440, 8):
 	if i < 368:

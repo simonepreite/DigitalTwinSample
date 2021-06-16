@@ -1,10 +1,17 @@
+"""
+Usage: 
+run the file by using python regression2.py
+It is possibile to change the prediction by changing the variable simulation_list=RUNX or make your own list with the same format of the others
+"""
+
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 import pickle
 import matplotlib.pyplot as plt
 
-def pre_models_dataset(dataset, list_key):
+"""def pre_models_dataset(dataset, list_key, keys):
 	keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:","Glucose concentration in Feed stream:"]
 	dataset_to_return=[]
 	for elem in list_key:
@@ -15,12 +22,11 @@ def pre_models_dataset(dataset, list_key):
 		nplist=np.array(tmp).T.tolist()
 		for elem in nplist:
 			dataset_to_return.append(elem)
-	return np.array(dataset_to_return)
+	return np.array(dataset_to_return)"""
 
 
-def extract_dataset(dataset, list_key):
-	keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:","Glucose concentration in Feed stream:", "Viable Cell Density:", "Ammonium concentration in BR:", "Lactate concentration in BR:"]
-	#keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:", "Feeding Rate:", "Perfusion Rate:", "Bleed Rate:", "Glucose concentration in Feed stream:", "Glucose concentration in Feed stream:"]
+def extract_dataset(dataset, list_key, keys):
+	#list_key refer to the sheets of the dataset, the RUN1, RUN2, etc
 	dataset_to_return=[]
 	for elem in list_key:
 		tmp = []
@@ -32,9 +38,9 @@ def extract_dataset(dataset, list_key):
 			dataset_to_return.append(elem)
 	return np.array(dataset_to_return)
 
-def split_dataset(dataset, list_train, list_test):
-	train_dataset=extract_dataset(dataset, list_train)
-	test_dataset=extract_dataset(dataset, list_test)
+def split_dataset(dataset, list_train, list_test, keys):
+	train_dataset=extract_dataset(dataset, list_train, keys)
+	test_dataset=extract_dataset(dataset, list_test, keys)
 	return train_dataset, test_dataset
 
 
@@ -45,8 +51,11 @@ df1 = pd.read_excel(xls, 'Run1')
 train_list=['Run3','Run4','Run5','Run6','Run7','Run8']
 test_list=['Run9','Run10']
 
-pre_model_dataset=pre_models_dataset(xls, train_list)
-train_dataset, test_dataset=split_dataset(xls, train_list, test_list)
+#pre_model_dataset=pre_models_dataset(xls, train_list)
+pre_model_keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:","Glucose concentration in Feed stream:"]
+final_model_keys=["Cultivation Time:","Temperature:","pH:","Stirring rate:","Glucose concentration in Feed stream:", "Viable Cell Density:", "Ammonium concentration in BR:", "Lactate concentration in BR:"]
+pre_model_dataset=extract_dataset(xls, train_list, pre_model_keys)
+train_dataset, test_dataset=split_dataset(xls, train_list, test_list, final_model_keys)
 y_prod=[]
 for key in train_list:
 	df=pd.read_excel(xls, key)
@@ -89,7 +98,7 @@ RUN8=[[36.5, 6.75, 210, 17.5], [36.5, 7, 240, 17.5], [37, 6.75, 210, 10], [37, 6
 RUN9=[[36.5, 7.25, 210, 5], [36.5, 6.75, 270, 10], [36.5, 7.25, 210, 5], [36.5, 7, 270, 5]]
 RUN10=[[36.5, 7.25, 240, 10], [36.5, 7, 210, 10], [36.5, 7, 210, 10], [37, 7, 240, 10]]
 
-simulation_list=RUN10
+simulation_list=RUN7
 simulation=[]
 for i in range(0, 1440, 8):
 	if i < 368:
