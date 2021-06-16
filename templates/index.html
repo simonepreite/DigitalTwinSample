@@ -1,0 +1,96 @@
+<head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js" integrity="sha512-CAv0l04Voko2LIdaPmkvGjH3jLsH+pmTXKFoyh5TIimAME93KjejeP9j7wSeSRXqXForv73KUZGJMn8/P98Ifg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+</head>
+
+
+
+
+
+
+
+<nav class="navbar navbar-dark bg-dark">
+  
+  <div class="container">
+  <div class="row">
+    <div class="col">
+<a class="navbar-brand" href="javascript:window.location.reload(true)">
+    <img src="{{ url_for('static',filename='images/cell.jpg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Digital Twin
+  </a>    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run1 onclick="PrintGraph('Run1');">Run1</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run2 onclick="PrintGraph('Run2');">Run2</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run3 onclick="PrintGraph('Run3');">Run3</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run4 onclick="PrintGraph('Run4');">Run4</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run5 onclick="PrintGraph('Run5');">Run5</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run6 onclick="PrintGraph('Run6');">Run6</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run7 onclick="PrintGraph('Run7');">Run7</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run8 onclick="PrintGraph('Run8');">Run8</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run9 onclick="PrintGraph('Run9');">Run9</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=Run10 onclick="PrintGraph('Run10');">Run10</button>
+    </div>
+    <div class="col">
+<button type="button" class="btn btn-outline-primary" id=RunAll onclick="PrintProductAll();">RunAll</button>
+    </div>
+  </div>
+  </div>
+</div>
+</nav>
+
+   
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <canvas id="canv" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv1" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv2" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv3" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv4" width="200" height="100"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <canvas id="canv5" width="400" height="200"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv6" width="400" height="200"></canvas>    
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <canvas id="canv7" width="500" height="150"></canvas>
+    </div>
+  </div>
+</div>
+

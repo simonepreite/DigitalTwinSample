@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Digital Twin</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js" integrity="sha512-CAv0l04Voko2LIdaPmkvGjH3jLsH+pmTXKFoyh5TIimAME93KjejeP9j7wSeSRXqXForv73KUZGJMn8/P98Ifg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+<!--<script src="{{ url_for('static',filename='js/dashboard.js') }}"></script>-->
+ <link href="{{ url_for('static',filename='css/dashboard.css') }}" rel="stylesheet">
+ <link href="{{ url_for('static',filename='css/dashboard.rtl.css') }}" rel="stylesheet">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+  </head>
+  <body>
+    
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="javascript:window.location.reload(true)">Digital Twin</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+    </li>
+  </ul>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="padding: 1em; padding-top: 4em;">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <div class="d-grid gap-2">
+
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run1');">Run1</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run2');">Run2</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run3');">Run3</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run4');">Run4</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run5');">Run5</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run6');">Run6</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run7');">Run7</button>   
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run8');">Run8</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run9');">Run9</button>
+            <button type="button" class="btn-sm btn-outline-primary" id=Run1 onclick="PrintGraph('Run10');">Run10</button>
+            <button type="button" class="btn-sm btn-primary" id=RunAll onclick="PrintProductAll();">RunAll</button>
+
+            <label for="exampleFormControlInput1" class="form-label">Start</label>
+            <input id="sim_data_0" placeholder="C°, pH, Stirring Rate, Glucose Feed">
+            <label for="exampleFormControlInput1" class="form-label">First Change</label>
+            <input id="sim_data_1" placeholder="C°, pH, Stirring Rate, Glucose Feed">
+            <label for="exampleFormControlInput1" class="form-label">Second Change</label>
+            <input id="sim_data_2" placeholder="C°, pH, Stirring Rate, Glucose Feed">
+            <label for="exampleFormControlInput1" class="form-label">Last Change</label>
+            <input id="sim_data_3" placeholder="C°, pH, Stirring Rate, Glucose Feed">
+
+            <button type="button" class="btn btn-success" id=RunSimulation onclick="PrintSimulation();">Run Simulation</button>
+          </div>
+        </ul>
+    </nav>
+
+
+<div id="modal_error" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">WARNING</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#modal_error').hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Wrong DATA format, please insert correct data</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="$('#modal_error').hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="container">
+  <div class="row">
+    <div class="col">
+      <canvas id="canv" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv1" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv2" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv3" width="200" height="100"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv4" width="200" height="100"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <canvas id="canv5" width="400" height="200"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="canv6" width="400" height="200"></canvas>    
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <canvas id="canv7" width="500" height="150"></canvas>
+    </div>
+  </div>
+</div>
+      </div>
+
+
+      
+  </body>
+</html>
