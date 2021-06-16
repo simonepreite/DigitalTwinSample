@@ -7,9 +7,19 @@ git clone https://github.com/simonepreite/DataHow.git
 cd DataHow
 virtualenv --python python3 .venv
 source .venv/bin/activate
-run "pip install -r requirements.txt"
-run "export FLASK_APP=server.py"
-run "flask run"
+pip install -r requirements.txt
+export FLASK_APP=server.py
+flask run
+```
+Use the tool by running in a browser
+```console
+http://localhost:5000
+```
+
+or, to use the old interface
+
+```console
+http://localhost:5000/old
 ```
 
 ## REGRESSION MODEL
