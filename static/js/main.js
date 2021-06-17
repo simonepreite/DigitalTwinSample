@@ -47,7 +47,7 @@ function get_values(run, key){
   }
   $.ajax({
       type: "GET",
-      url: "http://simonepreite.cf:5000/_get_param",
+      url: "http://localhost:5000/_get_param",
       data: request_data,
       async: false,
       success: function(res){
@@ -281,7 +281,7 @@ function PrintSimulation(){
 
   $.ajax({
       type: "GET",
-      url: "http://simonepreite.cf:5000/_run_simulation",
+      url: "http://localhost:5000/_run_simulation",
       data: request_data,
       async: false,
       success: function(res){
